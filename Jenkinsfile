@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         gradle 'gradle-8.10.2'
-        jdk 'openjdk-21'
+        jdk 'jdk-21'
     }
 
     parameters {
@@ -39,7 +39,7 @@ pipeline {
                     sh "chmod +x ./gradlew"                
                     sh 'pwd'
                     sh 'ls'
-                    sh "./gradlew clean build"                
+                    sh "gradle clean build"                
                 }
             }
         }
