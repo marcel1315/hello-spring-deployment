@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: hello-spring
   name: hello-db
+  namespace: hello-spring-dev
   labels:
     part-of: k8s-hello
     component: hello-db
