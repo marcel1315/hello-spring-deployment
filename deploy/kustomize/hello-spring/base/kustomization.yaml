@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  part-of: k8s-hello
+  component: backend-server
+  name: hello-spring
+  instance: hello-spring-1
+  managed-by: kustomize
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - secret.yaml
+  - service.yaml

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hello-spring-dev
+  labels:
+    part-of: k8s-hello
+    managed-by: kubectl

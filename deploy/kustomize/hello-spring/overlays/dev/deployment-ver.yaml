@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-spring
+spec:
+  template:
+    spec:
+      containers:
+        - name: hello-spring
+          image: marcel1315/hello-spring:1.0.0
+          imagePullPolicy: Always
