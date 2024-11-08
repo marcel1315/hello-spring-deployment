@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: hello-spring
+  name: hello-db
+  labels:
+    part-of: k8s-hello
+    component: hello-db
+    name: hello-db
+    instance: hello-db-1
+    version: 1.0.0
+    managed-by: kubectl
+spec:
+  serviceName: mariadb
+  selector:
+    matchLabels:
+      part-of: k8s-hello
+      component: hello-db
+      name: hello-db
+      instance: hello-db-1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        part-of: k8s-hello
+        component: hello-db
+        name: hello-db
+        instance: hello-db-1
+        version: 1.0.0
+    spec:
+      containers:
+        - name: hello-db-mariadb
+          image: mariadb:10.11.8
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: MYSQL_USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: MYSQL_PASSWORD
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-config
+                  key: DB_URL
+          volumeMounts:
+            - name: longhorn-volume
+              mountPath: /var/lib/mysql # mariadb will use this directory.
+  volumeClaimTemplates:
+    - metadata:
+        name: longhorn-volume
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10G
+        storageClassName: "longhorn"
