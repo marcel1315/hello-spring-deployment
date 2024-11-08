@@ -28,6 +28,7 @@ pipeline {
         stage('Check Java Version') {
             steps {
                 sh 'java -version'
+                echo '$JAVA_HOME'
             }
         }
 
@@ -36,6 +37,8 @@ pipeline {
                 dir('source-code') {
                     // Give 755 (644 when uploading from Windows)
                     sh "chmod +x ./gradlew"                
+                    sh 'pwd'
+                    sh 'ls'
                     sh "./gradlew clean build"                
                 }
             }
