@@ -28,7 +28,7 @@ pipeline {
         stage('Check Java Version') {
             steps {
                 sh 'java -version'
-                echo '$JAVA_HOME'
+                sh 'echo $JAVA_HOME'
             }
         }
 
