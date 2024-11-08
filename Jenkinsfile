@@ -29,7 +29,6 @@ pipeline {
             steps {
                 dir('source-code') {
                     sh 'java -version'
-                    sh 'echo $JAVA_HOME'
                     sh 'gradle -q javaToolchains'
                 }
             }
@@ -40,9 +39,7 @@ pipeline {
                 dir('source-code') {
                     // Give 755 (644 when uploading from Windows)
                     sh "chmod +x ./gradlew"                
-                    sh 'pwd'
-                    sh 'ls'
-                    sh "./gradlew clean build --stacktrace"                
+                    sh "./gradlew clean build"                
                 }
             }
         }
@@ -59,6 +56,7 @@ pipeline {
             steps {
                 dir('source-code') {
                     // Copy jar
+                    sh "mkdir -p build/docker/"
                     sh "cp ./build/libs/hello-spring-0.0.1-SNAPSHOT.jar ./build/docker/app-0.0.1-SNAPSHOT.jar"
 
                     // Docker build
