@@ -56,11 +56,12 @@ pipeline {
             steps {
                 dir('source-code') {
                     // Copy jar
-                    sh "mkdir -p build/docker/"
-                    sh "cp ./build/libs/hello-spring-0.0.1-SNAPSHOT.jar ./build/docker/app-0.0.1-SNAPSHOT.jar"
+                    // sh "mkdir -p build/docker/"
+                    // sh "cp ./build/libs/hello-spring-0.0.1-SNAPSHOT.jar ./build/docker/app-0.0.1-SNAPSHOT.jar"
+                    // sh "cp ./Dockerfile ./build/docker/Dockerfile"
 
                     // Docker build
-                    sh "docker build -t ${DOCKERHUB_USERNAME}/hello-spring:1.0.0 ./build/docker"
+                    sh "docker build -t ${DOCKERHUB_USERNAME}/hello-spring:1.0.0 ."
                 }
             }
         }
