@@ -36,7 +36,7 @@ pipeline {
                 dir('source-code') {
                     // Give 755 (644 when uploading from Windows)
                     sh "chmod +x ./gradlew"                
-                    sh "gradle clean build"                
+                    sh "./gradlew clean build"                
                 }
             }
         }
