@@ -27,9 +27,11 @@ pipeline {
 
         stage('Check Java Version') {
             steps {
-                sh 'java -version'
-                sh 'echo $JAVA_HOME'
-                sh 'gradle -q javaToolchains'
+                dir('source-code') {
+                    sh 'java -version'
+                    sh 'echo $JAVA_HOME'
+                    sh 'gradle -q javaToolchains'
+                }
             }
         }
 
